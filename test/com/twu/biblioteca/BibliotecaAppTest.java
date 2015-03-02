@@ -12,10 +12,8 @@ public class BibliotecaAppTest {
     @Test
     public void testSeeWelcomeMessageAndBookListWhenAppStartup() {
         StringBuilder startMessage = new StringBuilder();
-        startMessage.append("welcome to use biblioteca\n");
-        startMessage.append("Book List:\n");
-        startMessage.append("C++ Primer | Bob | 1998\n");
-        startMessage.append("Java HeadFirst | Luce | 2007\n");
+        startMessage.append(showWelcomeMessage());
+        startMessage.append(showBookList());
 
         ByteArrayOutputStream output = new ByteArrayOutputStream();
         System.setOut(new PrintStream(output));
@@ -24,6 +22,15 @@ public class BibliotecaAppTest {
         assertEquals(startMessage.toString(), output.toString());
     }
 
+    private String showWelcomeMessage() {
+        return "welcome to use biblioteca\n";
+    }
 
-
+    private String showBookList() {
+        StringBuilder bookList = new StringBuilder();
+        bookList.append("Book List:\n");
+        bookList.append("C++ Primer | Bob | 1998\n");
+        bookList.append("Java HeadFirst | Luce | 2007\n");
+        return bookList.toString();
+    }
 }
