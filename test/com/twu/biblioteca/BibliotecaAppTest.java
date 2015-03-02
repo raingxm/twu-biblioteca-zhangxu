@@ -32,6 +32,17 @@ public class BibliotecaAppTest {
         assertEquals(expect.toString(), output.toString());
     }
 
+    @Test
+    public void testWhenUserSelectInvalidOptionShowWarningMessage() {
+        StringBuilder expect = new StringBuilder();
+        expect.append("Select an invalid option, retry please:\n");
+
+        ByteArrayOutputStream output = setSystemOutput();
+
+        BibliotecaApp.selectMenu(22);
+        assertEquals(expect.toString(), output.toString());
+    }
+
     private ByteArrayOutputStream setSystemOutput() {
         ByteArrayOutputStream output = new ByteArrayOutputStream();
         System.setOut(new PrintStream(output));

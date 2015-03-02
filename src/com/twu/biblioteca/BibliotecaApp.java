@@ -44,6 +44,8 @@ public class BibliotecaApp {
     public static void selectMenu(int option) {
         if(option == 1) {
             showBookList();
+        } else {
+            System.out.println("Select an invalid option, retry please:");
         }
     }
 }
