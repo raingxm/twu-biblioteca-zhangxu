@@ -2,6 +2,7 @@ package com.twu.biblioteca;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class BibliotecaApp {
     private static List<Book> books = new ArrayList<Book>();
@@ -21,19 +22,28 @@ public class BibliotecaApp {
     }
 
     public static void showBookList() {
+        addSomeBooksToLib();
         System.out.println("Book List:");
         for(Book book : books) {
             System.out.println(book);
         }
     }
 
-    public static void startGame() {
-        addSomeBooksToLib();
+    public static void startLibaryPage() {
         showWelcomeMessage();
         showMainMenu();
     }
 
     public static void main(String[] args) {
-       startGame();
+        startLibaryPage();
+        Scanner scanner = new Scanner(System.in);
+        int option = scanner.nextInt();
+        selectMenu(option);
+    }
+
+    public static void selectMenu(int option) {
+        if(option == 1) {
+            showBookList();
+        }
     }
 }

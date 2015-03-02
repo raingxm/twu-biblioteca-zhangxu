@@ -10,16 +10,32 @@ import static org.junit.Assert.*;
 public class BibliotecaAppTest {
 
     @Test
-    public void testSeeWelcomeMessageAndBookListWhenAppStartup() {
+    public void testSeeWelcomeMessageAndMainMenuWhenAppStartup() {
         StringBuilder startMessage = new StringBuilder();
         startMessage.append(showWelcomeMessage());
         startMessage.append(showMainMenu());
 
+        ByteArrayOutputStream output = setSystemOutput();
+
+        BibliotecaApp.startLibaryPage();
+        assertEquals(startMessage.toString(), output.toString());
+    }
+
+    @Test
+    public void testWhenUserSelectOnePrintBookList() {
+        StringBuilder expect = new StringBuilder();
+        expect.append(showBookList());
+
+        ByteArrayOutputStream output = setSystemOutput();
+
+        BibliotecaApp.selectMenu(1);
+        assertEquals(expect.toString(), output.toString());
+    }
+
+    private ByteArrayOutputStream setSystemOutput() {
         ByteArrayOutputStream output = new ByteArrayOutputStream();
         System.setOut(new PrintStream(output));
-        BibliotecaApp.main(new String[]{});
-
-        assertEquals(startMessage.toString(), output.toString());
+        return output;
     }
 
     private String showMainMenu() {
