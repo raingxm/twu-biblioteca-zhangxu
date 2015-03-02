@@ -10,11 +10,18 @@ import static org.junit.Assert.*;
 public class BibliotecaAppTest {
 
     @Test
-    public void testWelcomeMessage() {
+    public void testSeeWelcomeMessageAndBookListWhenAppStartup() {
+        StringBuilder startMessage = new StringBuilder();
+        startMessage.append("welcome to use biblioteca\n");
+        startMessage.append("Book List:\n");
+        startMessage.append("C++ Primer\n");
+        startMessage.append("Java HeadFirst\n");
+
         ByteArrayOutputStream output = new ByteArrayOutputStream();
         System.setOut(new PrintStream(output));
         BibliotecaApp.main(new String[]{});
-        assertEquals("welcome to use biblioteca\n", output.toString());
+
+        assertEquals(startMessage.toString(), output.toString());
     }
 
 }
