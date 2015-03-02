@@ -14,8 +14,8 @@ public class BibliotecaAppTest {
         StringBuilder startMessage = new StringBuilder();
         startMessage.append("welcome to use biblioteca\n");
         startMessage.append("Book List:\n");
-        startMessage.append("C++ Primer\n");
-        startMessage.append("Java HeadFirst\n");
+        startMessage.append("C++ Primer | Bob | 1998\n");
+        startMessage.append("Java HeadFirst | Luce | 2007\n");
 
         ByteArrayOutputStream output = new ByteArrayOutputStream();
         System.setOut(new PrintStream(output));
@@ -23,5 +23,7 @@ public class BibliotecaAppTest {
 
         assertEquals(startMessage.toString(), output.toString());
     }
+
+
 
 }
