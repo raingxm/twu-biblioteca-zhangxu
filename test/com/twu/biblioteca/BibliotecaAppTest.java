@@ -13,13 +13,20 @@ public class BibliotecaAppTest {
     public void testSeeWelcomeMessageAndBookListWhenAppStartup() {
         StringBuilder startMessage = new StringBuilder();
         startMessage.append(showWelcomeMessage());
-        startMessage.append(showBookList());
+        startMessage.append(showMainMenu());
 
         ByteArrayOutputStream output = new ByteArrayOutputStream();
         System.setOut(new PrintStream(output));
         BibliotecaApp.main(new String[]{});
 
         assertEquals(startMessage.toString(), output.toString());
+    }
+
+    private String showMainMenu() {
+        StringBuilder mainMenu = new StringBuilder();
+        mainMenu.append("Main Menu(select one options below, such as 1 or 2):\n");
+        mainMenu.append("1: Display Book List\n");
+        return mainMenu.toString();
     }
 
     private String showWelcomeMessage() {
