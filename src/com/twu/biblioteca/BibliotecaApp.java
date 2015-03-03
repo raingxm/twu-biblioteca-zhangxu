@@ -13,9 +13,17 @@ public class BibliotecaApp {
         addSomeBooksToLib();
     }
 
+    public List<Book> getBookList() {
+        return books;
+    }
+
+    public static void main(String[] args) {
+        new BibliotecaApp().run();
+    }
+
     public void addSomeBooksToLib() {
-        books.add(new Book("C++ Primer", "Bob", 1998));
-        books.add(new Book("Java HeadFirst", "Luce", 2007));
+        addANewBookToLibrary("C++ Primer", "Bob", 1998);
+        addANewBookToLibrary("Java HeadFirst", "Luce", 2007);
     }
 
     public void showWelcomeMessage() {
@@ -49,15 +57,19 @@ public class BibliotecaApp {
         }
     }
 
-    public static void main(String[] args) {
-        new BibliotecaApp().run();
-    }
-
     public void selectMenu(String option) {
         if(parseInt(option) == 1) {
             showBookList();
         } else {
             System.out.println("Select an invalid option, retry please:");
         }
+    }
+
+    public void addANewBookToLibrary(String name, String author, int publishYear) {
+        this.books.add(new Book(name, author, publishYear));
+    }
+
+    public void checkoutBook(Book checkBook) {
+        books.remove(checkBook);
     }
 }

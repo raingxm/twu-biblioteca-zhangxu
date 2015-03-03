@@ -6,6 +6,7 @@ import org.junit.Test;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
+import java.util.List;
 
 import static org.junit.Assert.*;
 
@@ -65,6 +66,17 @@ public class BibliotecaAppTest {
         BibliotecaApp.main(new String[]{});
 
         assertEquals(expect.toString(), output.toString());
+    }
+
+    @Test
+    public void testCheckoutBookAndTheBookNotAppearsInLibBookList() {
+        bibliotecaApp.addANewBookToLibrary("Ruby on Rails", "Dave Thomas", 2007);
+        List<Book> books = bibliotecaApp.getBookList();
+        int numOfBooks = books.size();
+        Book checkBook = books.get(numOfBooks-1);
+        bibliotecaApp.checkoutBook(checkBook);
+        assertEquals(numOfBooks - 1, books.size());
+        assertFalse(books.contains(checkBook));
     }
 
     private ByteArrayOutputStream setSystemOutput() {
