@@ -92,6 +92,16 @@ public class BibliotecaAppTest {
         assertEquals(expect.toString(), output.toString());
     }
 
+    @Test
+    public void testSelectTwoThenShowPromptMessage() {
+        StringBuilder expect = new StringBuilder();
+        expect.append("please checkout book(type book name)\n");
+
+        ByteArrayOutputStream output = setSystemOutput();
+        bibliotecaApp.selectMenu(BibliotecaApp.CHECKOUT_BOOK_OPTION + "");
+        assertEquals(expect.toString(), output.toString());
+    }
+
     private ByteArrayOutputStream setSystemOutput() {
         ByteArrayOutputStream output = new ByteArrayOutputStream();
         System.setOut(new PrintStream(output));

@@ -36,6 +36,8 @@ public class BibliotecaApp {
     public void selectMenu(String option) {
         if(parseInt(option) == SHOW_BOOK_LIST_OPTION) {
             showBookList();
+        } else if(parseInt(option) == CHECKOUT_BOOK_OPTION) {
+            showCheckBookPromptMessage();
         } else {
             System.out.println("Select an invalid option, retry please:");
         }
@@ -44,6 +46,10 @@ public class BibliotecaApp {
     public void addSomeBooksToLib() {
         addANewBookToLibrary("C++ Primer", "Bob", 1998);
         addANewBookToLibrary("Java HeadFirst", "Luce", 2007);
+    }
+
+    public void showCheckBookPromptMessage() {
+        System.out.println("please checkout book(type book name)");
     }
 
     public void showWelcomeMessage() {
