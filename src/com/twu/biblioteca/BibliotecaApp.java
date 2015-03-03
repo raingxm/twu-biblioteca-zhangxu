@@ -7,6 +7,8 @@ import java.util.Scanner;
 import static java.lang.Integer.parseInt;
 
 public class BibliotecaApp {
+    public static final int SHOW_BOOK_LIST_OPTION = 1;
+    public static final int CHECKOUT_BOOK_OPTION = 2;
     private List<Book> books = new ArrayList<Book>();
 
     public BibliotecaApp() {
@@ -21,6 +23,24 @@ public class BibliotecaApp {
         new BibliotecaApp().run();
     }
 
+    public void run() {
+        startLibraryPage();
+        Scanner scanner = new Scanner(System.in);
+        String option = scanner.next();
+        while(!option.equals("quit")) {
+            selectMenu(option);
+            option = scanner.next();
+        }
+    }
+
+    public void selectMenu(String option) {
+        if(parseInt(option) == SHOW_BOOK_LIST_OPTION) {
+            showBookList();
+        } else {
+            System.out.println("Select an invalid option, retry please:");
+        }
+    }
+
     public void addSomeBooksToLib() {
         addANewBookToLibrary("C++ Primer", "Bob", 1998);
         addANewBookToLibrary("Java HeadFirst", "Luce", 2007);
@@ -32,8 +52,8 @@ public class BibliotecaApp {
 
     public void showMainMenu() {
         System.out.println("Main Menu(select one options below, such as 1 or 2):");
-        System.out.println("1: Display Book List");
-        System.out.println("2: Checkout Book");
+        System.out.println(SHOW_BOOK_LIST_OPTION + ": Display Book List");
+        System.out.println(CHECKOUT_BOOK_OPTION + ": Checkout Book");
     }
 
     public void showBookList() {
@@ -46,24 +66,6 @@ public class BibliotecaApp {
     public void startLibraryPage() {
         showWelcomeMessage();
         showMainMenu();
-    }
-
-    public void run() {
-        startLibraryPage();
-        Scanner scanner = new Scanner(System.in);
-        String option = scanner.next();
-        while(!option.equals("quit")) {
-            selectMenu(option);
-            option = scanner.next();
-        }
-    }
-
-    public void selectMenu(String option) {
-        if(parseInt(option) == 1) {
-            showBookList();
-        } else {
-            System.out.println("Select an invalid option, retry please:");
-        }
     }
 
     public void addANewBookToLibrary(String name, String author, int publishYear) {
