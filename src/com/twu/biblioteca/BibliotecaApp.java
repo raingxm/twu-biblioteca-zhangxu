@@ -33,6 +33,7 @@ public class BibliotecaApp {
     public void showMainMenu() {
         System.out.println("Main Menu(select one options below, such as 1 or 2):");
         System.out.println("1: Display Book List");
+        System.out.println("2: Checkout Book");
     }
 
     public void showBookList() {

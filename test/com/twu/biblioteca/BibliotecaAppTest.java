@@ -79,6 +79,19 @@ public class BibliotecaAppTest {
         assertFalse(books.contains(checkBook));
     }
 
+    @Test
+    public void testSeeCheckoutOptionInMainMenu() {
+        StringBuilder expect = new StringBuilder();
+        expect.append("Main Menu(select one options below, such as 1 or 2):\n");
+        expect.append("1: Display Book List\n");
+        expect.append("2: Checkout Book\n");
+
+        ByteArrayOutputStream output = setSystemOutput();
+        bibliotecaApp.showMainMenu();
+
+        assertEquals(expect.toString(), output.toString());
+    }
+
     private ByteArrayOutputStream setSystemOutput() {
         ByteArrayOutputStream output = new ByteArrayOutputStream();
         System.setOut(new PrintStream(output));
@@ -94,6 +107,7 @@ public class BibliotecaAppTest {
     private void showMainMenu(StringBuilder stringBuilder) {
         stringBuilder.append("Main Menu(select one options below, such as 1 or 2):\n");
         stringBuilder.append("1: Display Book List\n");
+        stringBuilder.append("2: Checkout Book\n");
     }
 
     private void showWelcomeMessage(StringBuilder stringBuilder) {
