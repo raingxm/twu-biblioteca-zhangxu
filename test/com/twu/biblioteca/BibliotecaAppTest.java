@@ -1,13 +1,19 @@
 package com.twu.biblioteca;
 
+import org.junit.Before;
 import org.junit.Test;
 
+import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 
 import static org.junit.Assert.*;
 
 public class BibliotecaAppTest {
+    @Before
+    public void createApp() {
+        BibliotecaApp bibliotecaApp = new BibliotecaApp();
+    }
 
     @Test
     public void testSeeWelcomeMessageAndMainMenuWhenAppStartup() {
@@ -17,7 +23,7 @@ public class BibliotecaAppTest {
 
         ByteArrayOutputStream output = setSystemOutput();
 
-        BibliotecaApp.startLibaryPage();
+        BibliotecaApp.startLibraryPage();
         assertEquals(startMessage.toString(), output.toString());
     }
 
@@ -28,18 +34,34 @@ public class BibliotecaAppTest {
 
         ByteArrayOutputStream output = setSystemOutput();
 
-        BibliotecaApp.selectMenu(1);
+        BibliotecaApp.selectMenu("1");
         assertEquals(expect.toString(), output.toString());
     }
 
     @Test
     public void testWhenUserSelectInvalidOptionShowWarningMessage() {
         StringBuilder expect = new StringBuilder();
-        expect.append("Select an invalid option, retry please:\n");
+        expect.append(showInvalidOptionWarningMessage());
 
         ByteArrayOutputStream output = setSystemOutput();
 
-        BibliotecaApp.selectMenu(22);
+        BibliotecaApp.selectMenu("22");
+        assertEquals(expect.toString(), output.toString());
+    }
+
+    @Test
+    public void testContinueChooseOptionUntilPressQuit() {
+        StringBuilder expect = new StringBuilder();
+        expect.append(showWelcomeMessage());
+        expect.append(showMainMenu());
+        expect.append(showBookList());
+        expect.append(showInvalidOptionWarningMessage());
+        expect.append(showBookList());
+        setSystemInput("1\n22\n1\nquit");
+
+        ByteArrayOutputStream output = setSystemOutput();
+        BibliotecaApp.main(new String[]{});
+
         assertEquals(expect.toString(), output.toString());
     }
 
@@ -47,6 +69,12 @@ public class BibliotecaAppTest {
         ByteArrayOutputStream output = new ByteArrayOutputStream();
         System.setOut(new PrintStream(output));
         return output;
+    }
+
+    private ByteArrayInputStream setSystemInput(String inputVal) {
+        ByteArrayInputStream in = new ByteArrayInputStream(inputVal.getBytes());
+        System.setIn(in);
+        return in;
     }
 
     private String showMainMenu() {
@@ -66,5 +94,9 @@ public class BibliotecaAppTest {
         bookList.append("C++ Primer | Bob | 1998\n");
         bookList.append("Java HeadFirst | Luce | 2007\n");
         return bookList.toString();
+    }
+
+    private String showInvalidOptionWarningMessage() {
+        return "Select an invalid option, retry please:\n";
     }
 }

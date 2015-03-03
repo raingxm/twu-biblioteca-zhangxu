@@ -4,8 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import static java.lang.Integer.parseInt;
+
 public class BibliotecaApp {
     private static List<Book> books = new ArrayList<Book>();
+
+    public BibliotecaApp() {
+        addSomeBooksToLib();
+    }
 
     public static void addSomeBooksToLib() {
         books.add(new Book("C++ Primer", "Bob", 1998));
@@ -22,27 +28,30 @@ public class BibliotecaApp {
     }
 
     public static void showBookList() {
-        addSomeBooksToLib();
         System.out.println("Book List:");
         for(Book book : books) {
             System.out.println(book);
         }
     }
 
-    public static void startLibaryPage() {
+    public static void startLibraryPage() {
         showWelcomeMessage();
         showMainMenu();
     }
 
     public static void main(String[] args) {
-        startLibaryPage();
+        BibliotecaApp bibliotecaApp = new BibliotecaApp();
+        startLibraryPage();
         Scanner scanner = new Scanner(System.in);
-        int option = scanner.nextInt();
-        selectMenu(option);
+        String option = scanner.next();
+        while(!option.equals("quit")) {
+            selectMenu(option);
+            option = scanner.next();
+        }
     }
 
-    public static void selectMenu(int option) {
-        if(option == 1) {
+    public static void selectMenu(String option) {
+        if(parseInt(option) == 1) {
             showBookList();
         } else {
             System.out.println("Select an invalid option, retry please:");
