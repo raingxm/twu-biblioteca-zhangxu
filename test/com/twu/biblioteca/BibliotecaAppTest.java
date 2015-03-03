@@ -74,7 +74,7 @@ public class BibliotecaAppTest {
         List<Book> books = bibliotecaApp.getBookList();
         int numOfBooks = books.size();
         Book checkBook = books.get(numOfBooks-1);
-        bibliotecaApp.checkoutBook(checkBook);
+        bibliotecaApp.checkoutBook(checkBook.getName());
         assertEquals(numOfBooks - 1, books.size());
         assertFalse(books.contains(checkBook));
     }

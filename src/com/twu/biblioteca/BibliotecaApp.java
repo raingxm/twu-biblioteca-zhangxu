@@ -78,7 +78,18 @@ public class BibliotecaApp {
         this.books.add(new Book(name, author, publishYear));
     }
 
-    public void checkoutBook(Book checkBook) {
-        books.remove(checkBook);
+    public void checkoutBook(String bookName) {
+        if(findBookInBookListByName(bookName) != null){
+            books.remove(findBookInBookListByName(bookName));
+        }
+    }
+
+    private Book findBookInBookListByName(String bookName) {
+        for(Book book: books) {
+            if(book.getName().equalsIgnoreCase(bookName)) {
+                return book;
+            }
+        }
+        return null;
     }
 }
