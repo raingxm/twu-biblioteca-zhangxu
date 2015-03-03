@@ -10,53 +10,55 @@ import java.io.PrintStream;
 import static org.junit.Assert.*;
 
 public class BibliotecaAppTest {
+    private BibliotecaApp bibliotecaApp;
+
     @Before
-    public void createApp() {
-        BibliotecaApp bibliotecaApp = new BibliotecaApp();
+    public void generateInitBooksInLib() {
+        bibliotecaApp = new BibliotecaApp();
     }
 
     @Test
     public void testSeeWelcomeMessageAndMainMenuWhenAppStartup() {
         StringBuilder startMessage = new StringBuilder();
-        startMessage.append(showWelcomeMessage());
-        startMessage.append(showMainMenu());
+        showWelcomeMessage(startMessage);
+        showMainMenu(startMessage);
 
         ByteArrayOutputStream output = setSystemOutput();
 
-        BibliotecaApp.startLibraryPage();
+        bibliotecaApp.startLibraryPage();
         assertEquals(startMessage.toString(), output.toString());
     }
 
     @Test
     public void testWhenUserSelectOnePrintBookList() {
         StringBuilder expect = new StringBuilder();
-        expect.append(showBookList());
-
+        showBookList(expect);
         ByteArrayOutputStream output = setSystemOutput();
 
-        BibliotecaApp.selectMenu("1");
+        bibliotecaApp.selectMenu("1");
         assertEquals(expect.toString(), output.toString());
     }
 
     @Test
     public void testWhenUserSelectInvalidOptionShowWarningMessage() {
+        bibliotecaApp.addSomeBooksToLib();
         StringBuilder expect = new StringBuilder();
-        expect.append(showInvalidOptionWarningMessage());
+        showInvalidOptionWarningMessage(expect);
 
         ByteArrayOutputStream output = setSystemOutput();
 
-        BibliotecaApp.selectMenu("22");
+        bibliotecaApp.selectMenu("22");
         assertEquals(expect.toString(), output.toString());
     }
 
     @Test
     public void testContinueChooseOptionUntilPressQuit() {
         StringBuilder expect = new StringBuilder();
-        expect.append(showWelcomeMessage());
-        expect.append(showMainMenu());
-        expect.append(showBookList());
-        expect.append(showInvalidOptionWarningMessage());
-        expect.append(showBookList());
+        showWelcomeMessage(expect);
+        showMainMenu(expect);
+        showBookList(expect);
+        showInvalidOptionWarningMessage(expect);
+        showBookList(expect);
         setSystemInput("1\n22\n1\nquit");
 
         ByteArrayOutputStream output = setSystemOutput();
@@ -77,26 +79,22 @@ public class BibliotecaAppTest {
         return in;
     }
 
-    private String showMainMenu() {
-        StringBuilder mainMenu = new StringBuilder();
-        mainMenu.append("Main Menu(select one options below, such as 1 or 2):\n");
-        mainMenu.append("1: Display Book List\n");
-        return mainMenu.toString();
+    private void showMainMenu(StringBuilder stringBuilder) {
+        stringBuilder.append("Main Menu(select one options below, such as 1 or 2):\n");
+        stringBuilder.append("1: Display Book List\n");
     }
 
-    private String showWelcomeMessage() {
-        return "welcome to use biblioteca\n";
+    private void showWelcomeMessage(StringBuilder stringBuilder) {
+        stringBuilder.append("welcome to use biblioteca\n");
     }
 
-    private String showBookList() {
-        StringBuilder bookList = new StringBuilder();
-        bookList.append("Book List:\n");
-        bookList.append("C++ Primer | Bob | 1998\n");
-        bookList.append("Java HeadFirst | Luce | 2007\n");
-        return bookList.toString();
+    private void showBookList(StringBuilder stringBuilder) {
+        stringBuilder.append("Book List:\n");
+        stringBuilder.append("C++ Primer | Bob | 1998\n");
+        stringBuilder.append("Java HeadFirst | Luce | 2007\n");
     }
 
-    private String showInvalidOptionWarningMessage() {
-        return "Select an invalid option, retry please:\n";
+    private void showInvalidOptionWarningMessage(StringBuilder stringBuilder) {
+        stringBuilder.append("Select an invalid option, retry please:\n");
     }
 }
