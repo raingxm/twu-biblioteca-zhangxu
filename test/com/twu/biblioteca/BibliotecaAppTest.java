@@ -104,6 +104,18 @@ public class BibliotecaAppTest {
         assertEquals(expect.toString(), output.toString());
     }
 
+    @Test
+    public void testCheckoutBookFailShowPromptMessage() {
+        StringBuilder expect = new StringBuilder();
+        showCheckoutBookPromptMessage(expect);
+        expect.append("That book is not available.\n");
+
+        ByteArrayInputStream inputBookName = setSystemInput("C Primer");
+        ByteArrayOutputStream output = setSystemOutput();
+        bibliotecaApp.selectMenuOption(BibliotecaApp.CHECKOUT_BOOK_OPTION);
+        assertEquals(expect.toString(), output.toString());
+    }
+
     private void showCheckoutBookPromptMessage(StringBuilder stringBuilder) {
         stringBuilder.append("please checkout book(type book name)\n");
     }

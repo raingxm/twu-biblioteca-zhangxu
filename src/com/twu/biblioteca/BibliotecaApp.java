@@ -78,9 +78,7 @@ public class BibliotecaApp {
     }
 
     public void showMainMenu() {
-        System.out.println("Main Menu(select one options below, such as 1 or 2):");
-        System.out.println(SHOW_BOOK_LIST_OPTION + ": Display Book List");
-        System.out.println(CHECKOUT_BOOK_OPTION + ": Checkout Book");
+        MainMenu.show();
     }
 
     public void showBookList() {
@@ -103,6 +101,8 @@ public class BibliotecaApp {
         if(findBookInBookListByName(bookName) != null){
             books.remove(findBookInBookListByName(bookName));
             System.out.println("Thank you! Enjoy the book");
+        } else {
+            System.out.println("That book is not available.");
         }
     }
 
