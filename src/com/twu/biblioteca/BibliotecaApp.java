@@ -66,9 +66,9 @@ public class BibliotecaApp {
         Book checkout = findBookInBookListByName(bookName);
         if(checkout != null){
             checkout.borrowOut();
-            System.out.println("Thank you! Enjoy the book");
+            showBorrowBookSuccessMessage();
         } else {
-            System.out.println("That book is not available.");
+            showBorrowBookFailMessage();
         }
     }
 
@@ -83,9 +83,9 @@ public class BibliotecaApp {
         Book checkout = findBookInBookListByName(bookName);
         if(checkout != null){
             checkout.returnBack();
-            showBorrowBookSuccessMessage();
+            showReturnBookSuccessMessage();
         } else {
-
+            showReturnBookFailMessage();
         }
     }
 
@@ -120,8 +120,20 @@ public class BibliotecaApp {
         return null;
     }
 
-    private void showBorrowBookSuccessMessage() {
+    private void showReturnBookSuccessMessage() {
         System.out.println("Thank you for returning the book.");
+    }
+
+    private void showReturnBookFailMessage() {
+        System.out.println("That is not a valid book to return.");
+    }
+
+    private void showBorrowBookFailMessage() {
+        System.out.println("That book is not available.");
+    }
+
+    private void showBorrowBookSuccessMessage() {
+        System.out.println("Thank you! Enjoy the book");
     }
 
     private void showReturnBookPromptMessage() {

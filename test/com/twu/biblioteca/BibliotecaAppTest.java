@@ -125,13 +125,19 @@ public class BibliotecaAppTest {
 
     @Test
     public void testReturnBookSuccessShowPromptMessage() {
-        List<Book> books = bibliotecaApp.getBookList();
-        Book book = books.get(books.size()-1);
-
+        Book book = getBookInLastOfBookList();
         bibliotecaApp.checkoutBook(book.getName());
         ByteArrayOutputStream output = setSystemOutput();
         bibliotecaApp.returnBook(book.getName());
         assertEquals(output.toString(), "Thank you for returning the book.\n");
+    }
+
+    @Test
+    public void testReturnBookFailShowPromptMessage() {
+        Book bookNotInBookList = new Book("HeadFirst Python", "Dahl", 2008);
+        ByteArrayOutputStream output = setSystemOutput();
+        bibliotecaApp.returnBook(bookNotInBookList.getName());
+        assertEquals(output.toString(), "That is not a valid book to return.\n");
     }
 
     private Book getBookInLastOfBookList() {
