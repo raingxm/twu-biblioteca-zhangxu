@@ -12,4 +12,8 @@ public class MainMenu {
         System.out.println(SHOW_BOOK_LIST_OPTION + ": Display Book List");
         System.out.println(CHECKOUT_BOOK_OPTION + ": Checkout Book");
     }
+
+    public static void invalidOptionPromptMessage() {
+        System.out.println("Select an invalid option, retry please:");
+    }
 }

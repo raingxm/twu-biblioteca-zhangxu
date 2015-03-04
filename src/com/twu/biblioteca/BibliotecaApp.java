@@ -28,19 +28,33 @@ public class BibliotecaApp {
         Scanner scanner = new Scanner(System.in);
         String option = scanner.nextLine();
         while(!option.equals("quit")) {
-            selectMenuOption(option);
-            option = scanner.nextLine();
+            if(isValidIntOption(option)) {
+                selectMenuOption(parseInt(option));
+                option = scanner.nextLine();
+            } else {
+                MainMenu.invalidOptionPromptMessage();
+            }
         }
     }
 
-    public void selectMenuOption(String option) {
-        if(parseInt(option) == SHOW_BOOK_LIST_OPTION) {
+    public void selectMenuOption(int option) {
+        if(option == SHOW_BOOK_LIST_OPTION) {
             showBookList();
-        } else if(parseInt(option) == CHECKOUT_BOOK_OPTION) {
+        } else if(option == CHECKOUT_BOOK_OPTION) {
             enterCheckoutMenu();
         } else {
-            System.out.println("Select an invalid option, retry please:");
+            MainMenu.invalidOptionPromptMessage();
         }
+    }
+
+    private boolean isValidIntOption(String option) {
+        try {
+            parseInt(option);
+        } catch (NumberFormatException e) {
+            e.printStackTrace();
+            return false;
+        }
+        return true;
     }
 
     public void enterCheckoutMenu() {

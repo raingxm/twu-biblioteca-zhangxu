@@ -36,7 +36,7 @@ public class BibliotecaAppTest {
         showBookList(expect);
         ByteArrayOutputStream output = setSystemOutput();
 
-        bibliotecaApp.selectMenuOption("1");
+        bibliotecaApp.selectMenuOption(1);
         assertEquals(expect.toString(), output.toString());
     }
 
@@ -48,7 +48,7 @@ public class BibliotecaAppTest {
 
         ByteArrayOutputStream output = setSystemOutput();
 
-        bibliotecaApp.selectMenuOption("22");
+        bibliotecaApp.selectMenuOption(22);
         assertEquals(expect.toString(), output.toString());
     }
 
@@ -100,7 +100,7 @@ public class BibliotecaAppTest {
 
         ByteArrayInputStream inputBookName = setSystemInput("C++ Primer");
         ByteArrayOutputStream output = setSystemOutput();
-        bibliotecaApp.selectMenuOption(BibliotecaApp.CHECKOUT_BOOK_OPTION + "");
+        bibliotecaApp.selectMenuOption(BibliotecaApp.CHECKOUT_BOOK_OPTION);
         assertEquals(expect.toString(), output.toString());
     }
 
