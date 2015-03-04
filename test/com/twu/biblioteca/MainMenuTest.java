@@ -17,13 +17,12 @@ public class MainMenuTest {
         ByteArrayOutputStream output = setSystemOutput();
         MainMenu.show();
 
-        assertTrue(output.toString().contains(checkoutMessage.toString()));
-        assertTrue(output.toString().indexOf(checkoutMessage.toString()) >= 0);
+        assertTrue(isOutputContainExpect(output, checkoutMessage));
     }
 
     public void testSeeListMovieOptionInMainMenu() {
         StringBuilder checkoutMessage = new StringBuilder();
-        checkoutMessage.append("4: Show Movie Lfist\n");
+        checkoutMessage.append("4: Show Movie List\n");
 
         ByteArrayOutputStream output = setSystemOutput();
         MainMenu.show();
@@ -37,4 +36,7 @@ public class MainMenuTest {
         return output;
     }
 
+    private boolean isOutputContainExpect(ByteArrayOutputStream output, StringBuilder expect) {
+        return output.toString().indexOf(expect.toString()) != -1;
+    }
 }

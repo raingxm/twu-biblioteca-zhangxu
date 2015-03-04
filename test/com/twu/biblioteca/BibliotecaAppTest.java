@@ -99,7 +99,7 @@ public class BibliotecaAppTest {
         ByteArrayOutputStream output = setSystemOutput();
         bibliotecaApp.showMainMenu();
 
-        assertTrue(output.toString().indexOf(checkoutMessage.toString()) != -1);
+        assertTrue(isOutputContainExpect(output, checkoutMessage));
     }
 
     @Test
@@ -180,5 +180,9 @@ public class BibliotecaAppTest {
 
     private void showInvalidOptionWarningMessage(StringBuilder stringBuilder) {
         stringBuilder.append("Select an invalid option, retry please:\n");
+    }
+
+    private boolean isOutputContainExpect(ByteArrayOutputStream output, StringBuilder expect) {
+        return output.toString().indexOf(expect.toString()) != -1;
     }
 }
