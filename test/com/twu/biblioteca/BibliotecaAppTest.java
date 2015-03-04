@@ -26,7 +26,7 @@ public class BibliotecaAppTest {
 
         ByteArrayOutputStream output = setSystemOutput();
 
-        bibliotecaApp.startLibraryPage();
+        bibliotecaApp.libraryHomePage();
         assertEquals(startMessage.toString(), output.toString());
     }
 

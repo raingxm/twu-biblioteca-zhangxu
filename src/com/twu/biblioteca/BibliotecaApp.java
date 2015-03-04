@@ -24,7 +24,7 @@ public class BibliotecaApp {
     }
 
     public void run() {
-        startLibraryPage();
+        libraryHomePage();
         Scanner scanner = new Scanner(System.in);
         String option = scanner.nextLine();
         while(!option.equals("quit")) {
@@ -76,9 +76,9 @@ public class BibliotecaApp {
         }
     }
 
-    public void startLibraryPage() {
+    public void libraryHomePage() {
         showWelcomeMessage();
-        showMainMenu();
+        MainMenu.show();
     }
 
     public void addANewBookToLibrary(String name, String author, int publishYear) {
