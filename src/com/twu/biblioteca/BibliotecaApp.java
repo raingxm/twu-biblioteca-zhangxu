@@ -48,7 +48,7 @@ public class BibliotecaApp {
                 showBookList();
                 break;
             case MainMenu.CHECKOUT_BOOK_OPTION:
-                enterCheckoutMenu();
+                enterCheckoutBookMenu();
                 break;
             case MainMenu.RETURN_BOOK_OPTION:
                 enterReturnBookMenu();
@@ -56,9 +56,41 @@ public class BibliotecaApp {
             case MainMenu.SHOW_MOVIE_LIST_OPTION:
                 showMovieList();
                 break;
+            case MainMenu.CHECKOUT_MOVIE_OPTION:
+                enterCheckoutMovieMenu();
+                break;
             default:
                 MainMenu.invalidOptionPromptMessage();
         }
+    }
+
+    private void enterCheckoutMovieMenu() {
+        showCheckMoviePromptMessage();
+        Scanner checkoutScanner = new Scanner(System.in);
+        String movieName = checkoutScanner.nextLine();
+        checkoutMovie(movieName);
+    }
+
+    public void checkoutMovie(String movieName) {
+        Movie checkoutMovie = findMovieInMovieListByName(movieName);
+        if(findMovieInMovieListByName(movieName) != null) {
+            checkoutMovie.borrowOut();
+            showCheckMovieSuccessMessage();
+        } else {
+            showCheckMovieFailMessage();
+        }
+    }
+
+    private void showCheckMovieFailMessage() {
+        System.out.println("That movie is not available.");
+    }
+
+    private void showCheckMovieSuccessMessage() {
+        System.out.println("enjoy movie at home");
+    }
+
+    private void showCheckMoviePromptMessage() {
+        System.out.println("please checkout movie, input movie name");
     }
 
     public void showBookList() {
@@ -79,7 +111,7 @@ public class BibliotecaApp {
         }
     }
 
-    public void enterCheckoutMenu() {
+    public void enterCheckoutBookMenu() {
         showCheckBookPromptMessage();
         Scanner checkoutScanner = new Scanner(System.in);
         String bookName = checkoutScanner.nextLine();
@@ -153,6 +185,15 @@ public class BibliotecaApp {
         for(Book book: books) {
             if(book.getName().equalsIgnoreCase(bookName)) {
                 return book;
+            }
+        }
+        return null;
+    }
+
+    private Movie findMovieInMovieListByName(String movieName) {
+        for(Movie movie: movies) {
+            if(movie.getName().equalsIgnoreCase(movieName)) {
+                return movie;
             }
         }
         return null;

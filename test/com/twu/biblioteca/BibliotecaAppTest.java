@@ -102,6 +102,18 @@ public class BibliotecaAppTest {
     }
 
     @Test
+    public void testCheckoutBookFailShowPromptMessage() {
+        StringBuilder expect = new StringBuilder();
+        showCheckoutBookPromptMessage(expect);
+        expect.append("That book is not available.\n");
+
+        ByteArrayInputStream inputBookName = setSystemInput("C Primer");
+        ByteArrayOutputStream output = setSystemOutput();
+        bibliotecaApp.selectMenuOption(MainMenu.CHECKOUT_BOOK_OPTION);
+        assertEquals(expect.toString(), output.toString());
+    }
+
+    @Test
     public void testReturnBook() {
         Book book = getBookInLastOfBookList();
         bibliotecaApp.checkoutBook(book.getName());
@@ -122,20 +134,14 @@ public class BibliotecaAppTest {
     }
 
     @Test
-    public void testCheckoutBookFailShowPromptMessage() {
-        StringBuilder expect = new StringBuilder();
-        showCheckoutBookPromptMessage(expect);
-        expect.append("That book is not available.\n");
-
-        ByteArrayInputStream inputBookName = setSystemInput("C Primer");
-        ByteArrayOutputStream output = setSystemOutput();
-        bibliotecaApp.selectMenuOption(MainMenu.CHECKOUT_BOOK_OPTION);
-        assertEquals(expect.toString(), output.toString());
-    }
-
-    @Test
     public void testCheckoutMovie() {
-        fail("");
+        bibliotecaApp.addANewMovieToLibrary("Source code", 2003, "Dave Selm", 9);
+        StringBuilder expect = new StringBuilder();
+        expect.append("enjoy movie at home\n");
+
+        ByteArrayOutputStream output = setSystemOutput();
+        bibliotecaApp.checkoutMovie("Source code");
+        assertEquals(expect.toString(), output.toString());
     }
 
     private void showMovieList(StringBuilder expect) {

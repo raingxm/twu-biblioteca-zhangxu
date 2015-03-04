@@ -31,6 +31,10 @@ public class Movie {
         this.director = director;
     }
 
+    public String getName() {
+        return name;
+    }
+
     public String toString() {
         String result = name + " | " + year + " | " + director;
         if(rating > 0) {
