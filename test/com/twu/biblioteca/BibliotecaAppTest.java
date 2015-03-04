@@ -36,7 +36,7 @@ public class BibliotecaAppTest {
         showBookList(expect);
         ByteArrayOutputStream output = setSystemOutput();
 
-        bibliotecaApp.selectMenu("1");
+        bibliotecaApp.selectMenuOption("1");
         assertEquals(expect.toString(), output.toString());
     }
 
@@ -48,7 +48,7 @@ public class BibliotecaAppTest {
 
         ByteArrayOutputStream output = setSystemOutput();
 
-        bibliotecaApp.selectMenu("22");
+        bibliotecaApp.selectMenuOption("22");
         assertEquals(expect.toString(), output.toString());
     }
 
@@ -93,13 +93,19 @@ public class BibliotecaAppTest {
     }
 
     @Test
-    public void testSelectTwoThenShowPromptMessage() {
+    public void testCheckoutBookSuccessShowSuccessMessage() {
         StringBuilder expect = new StringBuilder();
-        expect.append("please checkout book(type book name)\n");
+        showCheckoutBookPromptMessage(expect);
+        expect.append("Thank you! Enjoy the book\n");
 
+        ByteArrayInputStream inputBookName = setSystemInput("C++ Primer");
         ByteArrayOutputStream output = setSystemOutput();
-        bibliotecaApp.selectMenu(BibliotecaApp.CHECKOUT_BOOK_OPTION + "");
+        bibliotecaApp.selectMenuOption(BibliotecaApp.CHECKOUT_BOOK_OPTION + "");
         assertEquals(expect.toString(), output.toString());
+    }
+
+    private void showCheckoutBookPromptMessage(StringBuilder stringBuilder) {
+        stringBuilder.append("please checkout book(type book name)\n");
     }
 
     private ByteArrayOutputStream setSystemOutput() {

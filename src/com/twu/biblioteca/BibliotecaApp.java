@@ -26,21 +26,28 @@ public class BibliotecaApp {
     public void run() {
         startLibraryPage();
         Scanner scanner = new Scanner(System.in);
-        String option = scanner.next();
+        String option = scanner.nextLine();
         while(!option.equals("quit")) {
-            selectMenu(option);
-            option = scanner.next();
+            selectMenuOption(option);
+            option = scanner.nextLine();
         }
     }
 
-    public void selectMenu(String option) {
+    public void selectMenuOption(String option) {
         if(parseInt(option) == SHOW_BOOK_LIST_OPTION) {
             showBookList();
         } else if(parseInt(option) == CHECKOUT_BOOK_OPTION) {
-            showCheckBookPromptMessage();
+            enterCheckoutMenu();
         } else {
             System.out.println("Select an invalid option, retry please:");
         }
+    }
+
+    public void enterCheckoutMenu() {
+        showCheckBookPromptMessage();
+        Scanner checkoutScanner = new Scanner(System.in);
+        String bookName = checkoutScanner.nextLine();
+        checkoutBook(bookName);
     }
 
     public void addSomeBooksToLib() {
@@ -48,7 +55,7 @@ public class BibliotecaApp {
         addANewBookToLibrary("Java HeadFirst", "Luce", 2007);
     }
 
-    public void showCheckBookPromptMessage() {
+    private void showCheckBookPromptMessage() {
         System.out.println("please checkout book(type book name)");
     }
 
@@ -81,6 +88,7 @@ public class BibliotecaApp {
     public void checkoutBook(String bookName) {
         if(findBookInBookListByName(bookName) != null){
             books.remove(findBookInBookListByName(bookName));
+            System.out.println("Thank you! Enjoy the book");
         }
     }
 
