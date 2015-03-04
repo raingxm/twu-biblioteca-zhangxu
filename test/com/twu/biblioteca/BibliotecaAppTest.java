@@ -166,6 +166,7 @@ public class BibliotecaAppTest {
         stringBuilder.append("1: Display Book List\n");
         stringBuilder.append("2: Checkout Book\n");
         stringBuilder.append("3: Return Book\n");
+        stringBuilder.append("4: Show Movie List\n");
     }
 
     private void showWelcomeMessage(StringBuilder stringBuilder) {

@@ -36,14 +36,18 @@ public class BibliotecaApp {
     }
 
     public void selectMenuOption(int option) {
-        if(option == MainMenu.SHOW_BOOK_LIST_OPTION) {
-            showBookList();
-        } else if(option == MainMenu.CHECKOUT_BOOK_OPTION) {
-            enterCheckoutMenu();
-        } else if(option == MainMenu.RETURN_BOOK_OPTION){
-            enterReturnBookMenu();
-        } else {
-            MainMenu.invalidOptionPromptMessage();
+        switch (option) {
+            case MainMenu.SHOW_BOOK_LIST_OPTION:
+                showBookList();
+                break;
+            case MainMenu.CHECKOUT_BOOK_OPTION:
+                enterCheckoutMenu();
+                break;
+            case MainMenu.RETURN_BOOK_OPTION:
+                enterReturnBookMenu();
+                break;
+            default:
+                MainMenu.invalidOptionPromptMessage();
         }
     }
 
