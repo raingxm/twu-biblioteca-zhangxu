@@ -18,6 +18,17 @@ public class MainMenuTest {
         MainMenu.show();
 
         assertTrue(output.toString().contains(checkoutMessage.toString()));
+        assertTrue(output.toString().indexOf(checkoutMessage.toString()) >= 0);
+    }
+
+    public void testSeeListMovieOptionInMainMenu() {
+        StringBuilder checkoutMessage = new StringBuilder();
+        checkoutMessage.append("4: Show Movie Lfist\n");
+
+        ByteArrayOutputStream output = setSystemOutput();
+        MainMenu.show();
+
+        assertEquals(-1, output.toString().indexOf(checkoutMessage.toString()));
     }
 
     private ByteArrayOutputStream setSystemOutput() {

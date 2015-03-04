@@ -76,7 +76,7 @@ public class BibliotecaAppTest {
         bibliotecaApp.showBookList();
 
         ByteArrayOutputStream bookList = setSystemOutput();
-        assertFalse(bookList.toString().contains(checkBook.toString()));
+        assertTrue(bookList.toString().indexOf(checkBook.toString()) == -1);
     }
 
     @Test
@@ -99,7 +99,7 @@ public class BibliotecaAppTest {
         ByteArrayOutputStream output = setSystemOutput();
         bibliotecaApp.showMainMenu();
 
-        assertTrue(output.toString().contains(checkoutMessage.toString()));
+        assertTrue(output.toString().indexOf(checkoutMessage.toString()) != -1);
     }
 
     @Test
