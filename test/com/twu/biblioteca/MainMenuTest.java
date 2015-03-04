@@ -30,6 +30,16 @@ public class MainMenuTest {
         assertTrue(isOutputContainExpect(output, checkoutMessage));
     }
 
+    @Test
+    public void testSeeCheckoutMovieOptionInMainMenu() {
+        StringBuilder checkoutMessage = new StringBuilder();
+        checkoutMessage.append("5: Checkout Movie(type movie name)\n");
+
+        ByteArrayOutputStream output = setSystemOutput();
+        MainMenu.show();
+        assertTrue(isOutputContainExpect(output, checkoutMessage));
+    }
+
     private ByteArrayOutputStream setSystemOutput() {
         ByteArrayOutputStream output = new ByteArrayOutputStream();
         System.setOut(new PrintStream(output));

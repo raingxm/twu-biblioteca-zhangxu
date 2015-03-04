@@ -50,13 +50,6 @@ public class BibliotecaAppTest {
         assertEquals(expect.toString(), output.toString());
     }
 
-    private void showMovieList(StringBuilder expect) {
-        expect.append("Movie List:\n");
-        expect.append("Tomorrow | 2010 | Speberg | 9\n");
-        expect.append("Spring | 2003 | Steve\n");
-        expect.append("Money Ball | 2007 | Royn Smith | 8\n");
-    }
-
     @Test
     public void testWhenUserSelectInvalidOptionShowWarningMessage() {
         bibliotecaApp.addSomeBooksToLib();
@@ -109,6 +102,15 @@ public class BibliotecaAppTest {
     }
 
     @Test
+    public void testReturnBook() {
+        Book book = getBookInLastOfBookList();
+        bibliotecaApp.checkoutBook(book.getName());
+        assertTrue(book.isBorrowOut());
+        bibliotecaApp.returnBook(book.getName());
+        assertFalse(book.isBorrowOut());
+    }
+
+    @Test
     public void testSeeReturnBookOptionInMainMenu() {
         StringBuilder checkoutMessage = new StringBuilder();
         checkoutMessage.append("3: Return Book\n");
@@ -132,12 +134,15 @@ public class BibliotecaAppTest {
     }
 
     @Test
-    public void testReturnBook() {
-        Book book = getBookInLastOfBookList();
-        bibliotecaApp.checkoutBook(book.getName());
-        assertTrue(book.isBorrowOut());
-        bibliotecaApp.returnBook(book.getName());
-        assertFalse(book.isBorrowOut());
+    public void testCheckoutMovie() {
+        fail("");
+    }
+
+    private void showMovieList(StringBuilder expect) {
+        expect.append("Movie List:\n");
+        expect.append("Tomorrow | 2010 | Speberg | 9\n");
+        expect.append("Spring | 2003 | Steve\n");
+        expect.append("Money Ball | 2007 | Royn Smith | 8\n");
     }
 
     @Test
@@ -184,6 +189,7 @@ public class BibliotecaAppTest {
         stringBuilder.append("2: Checkout Book\n");
         stringBuilder.append("3: Return Book\n");
         stringBuilder.append("4: Show Movie List\n");
+        stringBuilder.append("5: Checkout Movie(type movie name)\n");
     }
 
     private void showWelcomeMessage(StringBuilder stringBuilder) {
