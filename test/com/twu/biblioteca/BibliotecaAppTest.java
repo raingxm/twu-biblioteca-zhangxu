@@ -71,23 +71,12 @@ public class BibliotecaAppTest {
     @Test
     public void testCheckoutBookAndTheBookNotAppearsInLibBookList() {
         bibliotecaApp.addANewBookToLibrary("Ruby on Rails", "Dave Thomas", 2007);
-        List<Book> books = bibliotecaApp.getBookList();
-        int numOfBooks = books.size();
-        Book checkBook = books.get(numOfBooks-1);
+        Book checkBook = getBookInLastOfBookList();
         bibliotecaApp.checkoutBook(checkBook.getName());
-        assertEquals(numOfBooks - 1, books.size());
-        assertFalse(books.contains(checkBook));
-    }
+        bibliotecaApp.showBookList();
 
-    @Test
-    public void testSeeReturnBookOptionInMainMenu() {
-        StringBuilder checkoutMessage = new StringBuilder();
-        checkoutMessage.append("3: Return Book\n");
-
-        ByteArrayOutputStream output = setSystemOutput();
-        bibliotecaApp.showMainMenu();
-
-        assertTrue(output.toString().contains(checkoutMessage.toString()));
+        ByteArrayOutputStream bookList = setSystemOutput();
+        assertFalse(bookList.toString().contains(checkBook.toString()));
     }
 
     @Test
@@ -103,6 +92,17 @@ public class BibliotecaAppTest {
     }
 
     @Test
+    public void testSeeReturnBookOptionInMainMenu() {
+        StringBuilder checkoutMessage = new StringBuilder();
+        checkoutMessage.append("3: Return Book\n");
+
+        ByteArrayOutputStream output = setSystemOutput();
+        bibliotecaApp.showMainMenu();
+
+        assertTrue(output.toString().contains(checkoutMessage.toString()));
+    }
+
+    @Test
     public void testCheckoutBookFailShowPromptMessage() {
         StringBuilder expect = new StringBuilder();
         showCheckoutBookPromptMessage(expect);
@@ -112,6 +112,31 @@ public class BibliotecaAppTest {
         ByteArrayOutputStream output = setSystemOutput();
         bibliotecaApp.selectMenuOption(MainMenu.CHECKOUT_BOOK_OPTION);
         assertEquals(expect.toString(), output.toString());
+    }
+
+    @Test
+    public void testReturnBook() {
+        Book book = getBookInLastOfBookList();
+        bibliotecaApp.checkoutBook(book.getName());
+        assertTrue(book.isBorrowOut());
+        bibliotecaApp.returnBook(book.getName());
+        assertFalse(book.isBorrowOut());
+    }
+
+    @Test
+    public void testReturnBookSuccessShowPromptMessage() {
+        List<Book> books = bibliotecaApp.getBookList();
+        Book book = books.get(books.size()-1);
+
+        bibliotecaApp.checkoutBook(book.getName());
+        ByteArrayOutputStream output = setSystemOutput();
+        bibliotecaApp.returnBook(book.getName());
+        assertEquals(output.toString(), "Thank you for returning the book.\n");
+    }
+
+    private Book getBookInLastOfBookList() {
+        List<Book> books = bibliotecaApp.getBookList();
+        return books.get(books.size()-1);
     }
 
     private void showCheckoutBookPromptMessage(StringBuilder stringBuilder) {

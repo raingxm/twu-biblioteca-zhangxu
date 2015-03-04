@@ -40,19 +40,19 @@ public class BibliotecaApp {
             showBookList();
         } else if(option == MainMenu.CHECKOUT_BOOK_OPTION) {
             enterCheckoutMenu();
+        } else if(option == MainMenu.RETURN_BOOK_OPTION){
+            enterReturnBookMenu();
         } else {
             MainMenu.invalidOptionPromptMessage();
         }
     }
 
-    private boolean isValidIntOption(String option) {
-        try {
-            parseInt(option);
-        } catch (NumberFormatException e) {
-            e.printStackTrace();
-            return false;
+    public void showBookList() {
+        System.out.println("Book List:");
+        for(Book book : books) {
+            if(!book.isBorrowOut())
+                System.out.println(book);
         }
-        return true;
     }
 
     public void enterCheckoutMenu() {
@@ -62,13 +62,36 @@ public class BibliotecaApp {
         checkoutBook(bookName);
     }
 
+    public void checkoutBook(String bookName) {
+        Book checkout = findBookInBookListByName(bookName);
+        if(checkout != null){
+            checkout.borrowOut();
+            System.out.println("Thank you! Enjoy the book");
+        } else {
+            System.out.println("That book is not available.");
+        }
+    }
+
+    public void enterReturnBookMenu() {
+        showReturnBookPromptMessage();
+        Scanner returnScanner = new Scanner(System.in);
+        String bookName = returnScanner.nextLine();
+        returnBook(bookName);
+    }
+
+    public void returnBook(String bookName) {
+        Book checkout = findBookInBookListByName(bookName);
+        if(checkout != null){
+            checkout.returnBack();
+            showBorrowBookSuccessMessage();
+        } else {
+
+        }
+    }
+
     public void addSomeBooksToLib() {
         addANewBookToLibrary("C++ Primer", "Bob", 1998);
         addANewBookToLibrary("Java HeadFirst", "Luce", 2007);
-    }
-
-    private void showCheckBookPromptMessage() {
-        System.out.println("please checkout book(type book name)");
     }
 
     public void showWelcomeMessage() {
@@ -77,13 +100,6 @@ public class BibliotecaApp {
 
     public void showMainMenu() {
         MainMenu.show();
-    }
-
-    public void showBookList() {
-        System.out.println("Book List:");
-        for(Book book : books) {
-            System.out.println(book);
-        }
     }
 
     public void libraryHomePage() {
@@ -95,15 +111,6 @@ public class BibliotecaApp {
         this.books.add(new Book(name, author, publishYear));
     }
 
-    public void checkoutBook(String bookName) {
-        if(findBookInBookListByName(bookName) != null){
-            books.remove(findBookInBookListByName(bookName));
-            System.out.println("Thank you! Enjoy the book");
-        } else {
-            System.out.println("That book is not available.");
-        }
-    }
-
     private Book findBookInBookListByName(String bookName) {
         for(Book book: books) {
             if(book.getName().equalsIgnoreCase(bookName)) {
@@ -111,5 +118,27 @@ public class BibliotecaApp {
             }
         }
         return null;
+    }
+
+    private void showBorrowBookSuccessMessage() {
+        System.out.println("Thank you for returning the book.");
+    }
+
+    private void showReturnBookPromptMessage() {
+        System.out.println("please return book(type book name)");
+    }
+
+    private void showCheckBookPromptMessage() {
+        System.out.println("please checkout book(type book name)");
+    }
+
+    private boolean isValidIntOption(String option) {
+        try {
+            parseInt(option);
+        } catch (NumberFormatException e) {
+            e.printStackTrace();
+            return false;
+        }
+        return true;
     }
 }

@@ -10,6 +10,20 @@ public class Book {
 
     private int publishYear;
 
+    private boolean borrow;
+
+    public boolean isBorrowOut() {
+        return borrow;
+    }
+
+    public void borrowOut() {
+        borrow = true;
+    }
+
+    public void returnBack() {
+        borrow = false;
+    }
+
     public String getName() {
         return name;
     }
@@ -18,6 +32,7 @@ public class Book {
         this.name = name;
         this.author = author;
         this.publishYear = publishYear;
+        this.borrow = false;
     }
 
     @Override
