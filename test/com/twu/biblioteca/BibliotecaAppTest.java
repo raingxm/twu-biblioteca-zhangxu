@@ -80,17 +80,6 @@ public class BibliotecaAppTest {
     }
 
     @Test
-    public void testSeeCheckoutOptionInMainMenu() {
-        StringBuilder checkoutMessage = new StringBuilder();
-        checkoutMessage.append("2: Checkout Book\n");
-
-        ByteArrayOutputStream output = setSystemOutput();
-        bibliotecaApp.showMainMenu();
-
-        assertTrue(output.toString().contains(checkoutMessage.toString()));
-    }
-
-    @Test
     public void testSeeReturnBookOptionInMainMenu() {
         StringBuilder checkoutMessage = new StringBuilder();
         checkoutMessage.append("3: Return Book\n");
