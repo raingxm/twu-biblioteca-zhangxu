@@ -144,13 +144,6 @@ public class BibliotecaAppTest {
         assertEquals(expect.toString(), output.toString());
     }
 
-    private void showMovieList(StringBuilder expect) {
-        expect.append("Movie List:\n");
-        expect.append("Tomorrow | 2010 | Speberg | 9\n");
-        expect.append("Spring | 2003 | Steve\n");
-        expect.append("Money Ball | 2007 | Royn Smith | 8\n");
-    }
-
     @Test
     public void testReturnBookSuccessShowPromptMessage() {
         Book book = getBookInLastOfBookList();
@@ -168,9 +161,28 @@ public class BibliotecaAppTest {
         assertEquals(output.toString(), "That is not a valid book to return.\n");
     }
 
+    @Test
+    public void testUserLoginLibrary() {
+        StringBuilder expect = new StringBuilder();
+        expect.append("please input username\n");
+        expect.append("please input password\n");
+        expect.append("login success\n");
+        ByteArrayInputStream input = setSystemInput("zhang-xv\n123456");
+        ByteArrayOutputStream outputStream = setSystemOutput();
+        bibliotecaApp.loginPage();
+        assertEquals(expect.toString(), outputStream.toString());
+    }
+
     private Book getBookInLastOfBookList() {
         List<Book> books = bibliotecaApp.getBooksList();
         return books.get(books.size()-1);
+    }
+
+    private void showMovieList(StringBuilder expect) {
+        expect.append("Movie List:\n");
+        expect.append("Tomorrow | 2010 | Speberg | 9\n");
+        expect.append("Spring | 2003 | Steve\n");
+        expect.append("Money Ball | 2007 | Royn Smith | 8\n");
     }
 
     private void showCheckoutBookPromptMessage(StringBuilder stringBuilder) {

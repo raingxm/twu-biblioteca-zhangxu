@@ -11,9 +11,16 @@ public class BibliotecaApp {
 
     private List<Movie> movies = new ArrayList<Movie>();
 
+    private List<User> users = new ArrayList<User>();
+
     public BibliotecaApp() {
         addSomeBooksToLib();
         addSomeMoviesToLib();
+        addInitUsers();
+    }
+
+    private void addInitUsers() {
+        this.users.add(new User());
     }
 
     public List<Book> getBooksList() {
@@ -30,6 +37,10 @@ public class BibliotecaApp {
 
     public void run() {
         libraryHomePage();
+        letUserChooseOption();
+    }
+
+    private void letUserChooseOption() {
         Scanner scanner = new Scanner(System.in);
         String option = scanner.nextLine();
         while(!option.equals("quit")) {
@@ -40,6 +51,19 @@ public class BibliotecaApp {
                 MainMenu.invalidOptionPromptMessage();
             }
         }
+    }
+
+    public void loginPage() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("please input username");
+        String userName = scanner.nextLine();
+        System.out.println("please input password");
+        String password = scanner.nextLine();
+        System.out.println("login success");
+    }
+
+    private void userLogin() {
+
     }
 
     public void selectMenuOption(int option) {
