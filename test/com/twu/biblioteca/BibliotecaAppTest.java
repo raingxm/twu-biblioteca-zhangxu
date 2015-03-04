@@ -81,15 +81,24 @@ public class BibliotecaAppTest {
 
     @Test
     public void testSeeCheckoutOptionInMainMenu() {
-        StringBuilder expect = new StringBuilder();
-        expect.append("Main Menu(select one options below, such as 1 or 2):\n");
-        expect.append("1: Display Book List\n");
-        expect.append("2: Checkout Book\n");
+        StringBuilder checkoutMessage = new StringBuilder();
+        checkoutMessage.append("2: Checkout Book\n");
 
         ByteArrayOutputStream output = setSystemOutput();
         bibliotecaApp.showMainMenu();
 
-        assertEquals(expect.toString(), output.toString());
+        assertTrue(output.toString().contains(checkoutMessage.toString()));
+    }
+
+    @Test
+    public void testSeeReturnBookOptionInMainMenu() {
+        StringBuilder checkoutMessage = new StringBuilder();
+        checkoutMessage.append("3: Return Book\n");
+
+        ByteArrayOutputStream output = setSystemOutput();
+        bibliotecaApp.showMainMenu();
+
+        assertTrue(output.toString().contains(checkoutMessage.toString()));
     }
 
     @Test
@@ -100,7 +109,7 @@ public class BibliotecaAppTest {
 
         ByteArrayInputStream inputBookName = setSystemInput("C++ Primer");
         ByteArrayOutputStream output = setSystemOutput();
-        bibliotecaApp.selectMenuOption(BibliotecaApp.CHECKOUT_BOOK_OPTION);
+        bibliotecaApp.selectMenuOption(MainMenu.CHECKOUT_BOOK_OPTION);
         assertEquals(expect.toString(), output.toString());
     }
 
@@ -112,7 +121,7 @@ public class BibliotecaAppTest {
 
         ByteArrayInputStream inputBookName = setSystemInput("C Primer");
         ByteArrayOutputStream output = setSystemOutput();
-        bibliotecaApp.selectMenuOption(BibliotecaApp.CHECKOUT_BOOK_OPTION);
+        bibliotecaApp.selectMenuOption(MainMenu.CHECKOUT_BOOK_OPTION);
         assertEquals(expect.toString(), output.toString());
     }
 
@@ -136,6 +145,7 @@ public class BibliotecaAppTest {
         stringBuilder.append("Main Menu(select one options below, such as 1 or 2):\n");
         stringBuilder.append("1: Display Book List\n");
         stringBuilder.append("2: Checkout Book\n");
+        stringBuilder.append("3: Return Book\n");
     }
 
     private void showWelcomeMessage(StringBuilder stringBuilder) {

@@ -6,11 +6,13 @@ package com.twu.biblioteca;
 public class MainMenu {
     public static final int SHOW_BOOK_LIST_OPTION = 1;
     public static final int CHECKOUT_BOOK_OPTION = 2;
+    public static final int RETURN_BOOK_OPTION = 3;
 
     public static void show() {
         System.out.println("Main Menu(select one options below, such as 1 or 2):");
         System.out.println(SHOW_BOOK_LIST_OPTION + ": Display Book List");
         System.out.println(CHECKOUT_BOOK_OPTION + ": Checkout Book");
+        System.out.println(RETURN_BOOK_OPTION + ": Return Book");
     }
 
     public static void invalidOptionPromptMessage() {

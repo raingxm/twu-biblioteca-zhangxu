@@ -7,8 +7,6 @@ import java.util.Scanner;
 import static java.lang.Integer.parseInt;
 
 public class BibliotecaApp {
-    public static final int SHOW_BOOK_LIST_OPTION = 1;
-    public static final int CHECKOUT_BOOK_OPTION = 2;
     private List<Book> books = new ArrayList<Book>();
 
     public BibliotecaApp() {
@@ -38,9 +36,9 @@ public class BibliotecaApp {
     }
 
     public void selectMenuOption(int option) {
-        if(option == SHOW_BOOK_LIST_OPTION) {
+        if(option == MainMenu.SHOW_BOOK_LIST_OPTION) {
             showBookList();
-        } else if(option == CHECKOUT_BOOK_OPTION) {
+        } else if(option == MainMenu.CHECKOUT_BOOK_OPTION) {
             enterCheckoutMenu();
         } else {
             MainMenu.invalidOptionPromptMessage();
