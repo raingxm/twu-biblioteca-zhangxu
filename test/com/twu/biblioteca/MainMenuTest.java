@@ -20,14 +20,14 @@ public class MainMenuTest {
         assertTrue(isOutputContainExpect(output, checkoutMessage));
     }
 
+    @Test
     public void testSeeListMovieOptionInMainMenu() {
         StringBuilder checkoutMessage = new StringBuilder();
         checkoutMessage.append("4: Show Movie List\n");
 
         ByteArrayOutputStream output = setSystemOutput();
         MainMenu.show();
-
-        assertEquals(-1, output.toString().indexOf(checkoutMessage.toString()));
+        assertTrue(isOutputContainExpect(output, checkoutMessage));
     }
 
     private ByteArrayOutputStream setSystemOutput() {

@@ -14,6 +14,7 @@ public class MainMenu {
         System.out.println(SHOW_BOOK_LIST_OPTION + ": Display Book List");
         System.out.println(CHECKOUT_BOOK_OPTION + ": Checkout Book");
         System.out.println(RETURN_BOOK_OPTION + ": Return Book");
+        System.out.println(SHOW_MOVIE_LIST_OPTION + ": Show Movie List");
     }
 
     public static void invalidOptionPromptMessage() {
