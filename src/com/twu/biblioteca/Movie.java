@@ -1,0 +1,41 @@
+package com.twu.biblioteca;
+
+/**
+ * Created by xuzhang on 3/4/15.
+ */
+public class Movie {
+    private String name;
+    private int year;
+    private String director;
+    private int rating = -1;
+    private boolean borrow = false;
+
+    public boolean isBorrowOut() {
+        return borrow;
+    }
+
+    public void borrowOut() {
+        borrow = true;
+    }
+
+    public Movie(String name, int year, String director, int rating) {
+        this.name = name;
+        this.year = year;
+        this.director = director;
+        this.rating = rating;
+    }
+
+    public Movie(String name, int year, String director) {
+        this.name = name;
+        this.year = year;
+        this.director = director;
+    }
+
+    public String toString() {
+        String result = name + " | " + year + " | " + director;
+        if(rating > 0) {
+            result += " | " + rating;
+        }
+        return result;
+    }
+}

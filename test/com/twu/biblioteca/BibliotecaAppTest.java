@@ -41,6 +41,23 @@ public class BibliotecaAppTest {
     }
 
     @Test
+    public void testSelectShowMovieOption() {
+        StringBuilder expect = new StringBuilder();
+        showMovieList(expect);
+        ByteArrayOutputStream output = setSystemOutput();
+
+        bibliotecaApp.selectMenuOption(4);
+        assertEquals(expect.toString(), output.toString());
+    }
+
+    private void showMovieList(StringBuilder expect) {
+        expect.append("Movie List:\n");
+        expect.append("Tomorrow | 2010 | Speberg | 9\n");
+        expect.append("Spring | 2003 | Steve\n");
+        expect.append("Money Ball | 2007 | Royn Smith | 8\n");
+    }
+
+    @Test
     public void testWhenUserSelectInvalidOptionShowWarningMessage() {
         bibliotecaApp.addSomeBooksToLib();
         StringBuilder expect = new StringBuilder();
@@ -141,7 +158,7 @@ public class BibliotecaAppTest {
     }
 
     private Book getBookInLastOfBookList() {
-        List<Book> books = bibliotecaApp.getBookList();
+        List<Book> books = bibliotecaApp.getBooksList();
         return books.get(books.size()-1);
     }
 

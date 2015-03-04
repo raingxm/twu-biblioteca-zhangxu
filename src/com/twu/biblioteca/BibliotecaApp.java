@@ -9,12 +9,19 @@ import static java.lang.Integer.parseInt;
 public class BibliotecaApp {
     private List<Book> books = new ArrayList<Book>();
 
+    private List<Movie> movies = new ArrayList<Movie>();
+
     public BibliotecaApp() {
         addSomeBooksToLib();
+        addSomeMoviesToLib();
     }
 
-    public List<Book> getBookList() {
+    public List<Book> getBooksList() {
         return books;
+    }
+
+    public List<Movie> getMoviesList() {
+        return movies;
     }
 
     public static void main(String[] args) {
@@ -46,6 +53,9 @@ public class BibliotecaApp {
             case MainMenu.RETURN_BOOK_OPTION:
                 enterReturnBookMenu();
                 break;
+            case MainMenu.SHOW_MOVIE_LIST_OPTION:
+                showMovieList();
+                break;
             default:
                 MainMenu.invalidOptionPromptMessage();
         }
@@ -54,8 +64,18 @@ public class BibliotecaApp {
     public void showBookList() {
         System.out.println("Book List:");
         for(Book book : books) {
-            if(!book.isBorrowOut())
+            if(!book.isBorrowOut()){
                 System.out.println(book);
+            }
+        }
+    }
+
+    public void showMovieList() {
+        System.out.println("Movie List:");
+        for(Movie movie : movies) {
+            if(!movie.isBorrowOut()) {
+                System.out.println(movie);
+            }
         }
     }
 
@@ -93,11 +113,6 @@ public class BibliotecaApp {
         }
     }
 
-    public void addSomeBooksToLib() {
-        addANewBookToLibrary("C++ Primer", "Bob", 1998);
-        addANewBookToLibrary("Java HeadFirst", "Luce", 2007);
-    }
-
     public void showWelcomeMessage() {
         System.out.println("welcome to use biblioteca");
     }
@@ -111,8 +126,27 @@ public class BibliotecaApp {
         MainMenu.show();
     }
 
+    public void addSomeBooksToLib() {
+        addANewBookToLibrary("C++ Primer", "Bob", 1998);
+        addANewBookToLibrary("Java HeadFirst", "Luce", 2007);
+    }
+
     public void addANewBookToLibrary(String name, String author, int publishYear) {
         this.books.add(new Book(name, author, publishYear));
+    }
+
+    public void addSomeMoviesToLib() {
+        addANewMovieToLibrary("Tomorrow", 2010, "Speberg", 9);
+        addANewMovieToLibrary("Spring", 2003, "Steve");
+        addANewMovieToLibrary("Money Ball", 2007, "Royn Smith", 8);
+    }
+
+    public void addANewMovieToLibrary(String name, int year, String director, int rating) {
+        this.movies.add(new Movie(name, year, director, rating));
+    }
+
+    public void addANewMovieToLibrary(String name, int year, String director) {
+        this.movies.add(new Movie(name, year, director));
     }
 
     private Book findBookInBookListByName(String bookName) {
