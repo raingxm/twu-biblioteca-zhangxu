@@ -40,8 +40,15 @@ public class BibliotecaApp {
     }
 
     public void run() {
+        if(!checkUserLogin()) {
+            loginPage();
+        }
         libraryHomePage();
         letUserChooseOption();
+    }
+
+    public boolean checkUserLogin() {
+        return loginUser != null;
     }
 
     public User getLoginUser() {
@@ -57,6 +64,7 @@ public class BibliotecaApp {
                 option = scanner.nextLine();
             } else {
                 MainMenu.invalidOptionPromptMessage();
+                option = scanner.nextLine();
             }
         }
     }
@@ -278,7 +286,6 @@ public class BibliotecaApp {
         try {
             parseInt(option);
         } catch (NumberFormatException e) {
-            e.printStackTrace();
             return false;
         }
         return true;

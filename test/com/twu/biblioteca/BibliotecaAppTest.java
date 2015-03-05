@@ -71,10 +71,10 @@ public class BibliotecaAppTest {
         showBookList(expect);
         showInvalidOptionWarningMessage(expect);
         showBookList(expect);
-        setSystemInput("1\n22\n1\nquit");
+        ByteArrayInputStream input = setSystemInput("1\n22\n1\nquit");
 
         ByteArrayOutputStream output = setSystemOutput();
-        BibliotecaApp.main(new String[]{});
+        bibliotecaApp.run();
 
         assertEquals(expect.toString(), output.toString());
     }
