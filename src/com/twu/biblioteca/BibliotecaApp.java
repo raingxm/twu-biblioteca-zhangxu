@@ -22,9 +22,9 @@ public class BibliotecaApp {
     }
 
     private void addInitUsers() {
-        this.users.add(new User("zhangxv", "xian-001", "123456"));
-        this.users.add(new User("liuhuimin", "bei-002", "01234"));
-        this.users.add(new User("yehua", "hei-003", "88888888"));
+        this.users.add(new User("zhangxv", "xian-001", "raingxm@163.com","89893843", "123456"));
+        this.users.add(new User("liuhuimin", "bei-002", "liuhuimin@126.com", "81783742", "01234"));
+        this.users.add(new User("yehua", "hei-003", "yehua@gmail.com", "62537214", "88888888"));
     }
 
     public List<Book> getBooksList() {
@@ -114,9 +114,16 @@ public class BibliotecaApp {
             case MainMenu.CHECKOUT_MOVIE_OPTION:
                 enterCheckoutMovieMenu();
                 break;
+            case MainMenu.SHOW_USER_INFO_OPTION:
+                showLoginUserInformation();
+                break;
             default:
                 MainMenu.invalidOptionPromptMessage();
         }
+    }
+
+    private void showLoginUserInformation() {
+        System.out.println(loginUser);
     }
 
     private void enterCheckoutMovieMenu() {

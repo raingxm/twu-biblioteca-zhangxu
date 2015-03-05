@@ -16,7 +16,7 @@ public class BibliotecaAppTest {
     @Before
     public void generateInitBooksInLib() {
         bibliotecaApp = new BibliotecaApp();
-        bibliotecaApp.setLoginUser(new User("zhangxv", "xian-001", "123456"));
+        bibliotecaApp.setLoginUser(new User("zhangxv", "xian-001", "raingxm@163.com","89893843", "123456"));
     }
 
     @Test
@@ -185,6 +185,16 @@ public class BibliotecaAppTest {
         ByteArrayOutputStream outputStream = setSystemOutput();
         bibliotecaApp.loginPage();
         assertTrue(isOutputContainExpect(outputStream, expect));
+    }
+
+    @Test
+    public void testChooseShowUserInformationOption() {
+        StringBuilder expect = new StringBuilder();
+        expect.append(bibliotecaApp.getLoginUser().toString() + "\n");
+
+        ByteArrayOutputStream outputStream = setSystemOutput();
+        bibliotecaApp.selectMenuOption(MainMenu.SHOW_USER_INFO_OPTION);
+        assertEquals(expect.toString(), outputStream.toString());
     }
 
     private Book getBookInLastOfBookList() {
