@@ -222,6 +222,7 @@ public class BibliotecaAppTest {
         stringBuilder.append("3: Return Book\n");
         stringBuilder.append("4: Show Movie List\n");
         stringBuilder.append("5: Checkout Movie(type movie name)\n");
+        stringBuilder.append("6: Show My Profile\n");
     }
 
     private void showWelcomeMessage(StringBuilder stringBuilder) {

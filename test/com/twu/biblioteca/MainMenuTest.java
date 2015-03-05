@@ -22,12 +22,12 @@ public class MainMenuTest {
 
     @Test
     public void testSeeListMovieOptionInMainMenu() {
-        StringBuilder checkoutMessage = new StringBuilder();
-        checkoutMessage.append("4: Show Movie List\n");
+        StringBuilder message = new StringBuilder();
+        message.append("4: Show Movie List\n");
 
         ByteArrayOutputStream output = setSystemOutput();
         MainMenu.show();
-        assertTrue(isOutputContainExpect(output, checkoutMessage));
+        assertTrue(isOutputContainExpect(output, message));
     }
 
     @Test
@@ -38,6 +38,16 @@ public class MainMenuTest {
         ByteArrayOutputStream output = setSystemOutput();
         MainMenu.show();
         assertTrue(isOutputContainExpect(output, checkoutMessage));
+    }
+
+    @Test
+    public void testSeeShowUserInformationOptionInMainMenu() {
+        StringBuilder message = new StringBuilder();
+        message.append("6: Show My Profile\n");
+
+        ByteArrayOutputStream output = setSystemOutput();
+        MainMenu.show();
+        assertTrue(isOutputContainExpect(output, message));
     }
 
     private ByteArrayOutputStream setSystemOutput() {
