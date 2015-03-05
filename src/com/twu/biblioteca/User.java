@@ -5,9 +5,16 @@ package com.twu.biblioteca;
  */
 public class User {
     private String name;
+    private String libraryNum;
     private String password;
 
-    public boolean checkUser(String username, String userPassword) {
-        return name.equals(username) && password.equals(userPassword);
+    public User(String name, String libraryNum, String password) {
+        this.name = name;
+        this.libraryNum = libraryNum;
+        this.password = password;
+    }
+
+    public boolean checkUser(String libraryNum, String userPassword) {
+        return this.libraryNum.equals(libraryNum) && this.password.equals(userPassword);
     }
 }

@@ -11,6 +11,8 @@ public class BibliotecaApp {
 
     private List<Movie> movies = new ArrayList<Movie>();
 
+    private User loginUser = null;
+
     private List<User> users = new ArrayList<User>();
 
     public BibliotecaApp() {
@@ -20,7 +22,9 @@ public class BibliotecaApp {
     }
 
     private void addInitUsers() {
-        this.users.add(new User());
+        this.users.add(new User("zhangxv", "xian-001", "123456"));
+        this.users.add(new User("liuhuimin", "bei-002", "01234"));
+        this.users.add(new User("yehua", "hei-003", "88888888"));
     }
 
     public List<Book> getBooksList() {
@@ -40,6 +44,10 @@ public class BibliotecaApp {
         letUserChooseOption();
     }
 
+    public User getLoginUser() {
+        return loginUser;
+    }
+
     private void letUserChooseOption() {
         Scanner scanner = new Scanner(System.in);
         String option = scanner.nextLine();
@@ -55,15 +63,30 @@ public class BibliotecaApp {
 
     public void loginPage() {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("please input username");
-        String userName = scanner.nextLine();
-        System.out.println("please input password");
-        String password = scanner.nextLine();
-        System.out.println("login success");
+        while (true) {
+            System.out.println("please input username(library num)");
+            String userLibraryNum = scanner.nextLine();
+            System.out.println("please input password");
+            String password = scanner.nextLine();
+            User loginUser = findUser(userLibraryNum, password);
+            if(loginUser != null) {
+                System.out.println("login success");
+                setLoginUser(loginUser);
+                MainMenu.show();
+                break;
+            } else {
+                System.out.println("login fail, user not exist");
+            }
+        }
     }
 
-    private void userLogin() {
-
+    private User findUser(String libraryNum, String password) {
+        for(User user : users) {
+            if(user.checkUser(libraryNum, password)) {
+                return user;
+            }
+        }
+        return null;
     }
 
     public void selectMenuOption(int option) {
@@ -98,7 +121,7 @@ public class BibliotecaApp {
     public void checkoutMovie(String movieName) {
         Movie checkoutMovie = findMovieInMovieListByName(movieName);
         if(findMovieInMovieListByName(movieName) != null) {
-            checkoutMovie.borrowOut();
+            checkoutMovie.borrowOut(getLoginUser());
             showCheckMovieSuccessMessage();
         } else {
             showCheckMovieFailMessage();
@@ -145,7 +168,7 @@ public class BibliotecaApp {
     public void checkoutBook(String bookName) {
         Book checkout = findBookInBookListByName(bookName);
         if(checkout != null){
-            checkout.borrowOut();
+            checkout.borrowOut(getLoginUser());
             showBorrowBookSuccessMessage();
         } else {
             showBorrowBookFailMessage();
@@ -221,6 +244,10 @@ public class BibliotecaApp {
             }
         }
         return null;
+    }
+
+    public void setLoginUser(User user) {
+        this.loginUser = user;
     }
 
     private void showReturnBookSuccessMessage() {

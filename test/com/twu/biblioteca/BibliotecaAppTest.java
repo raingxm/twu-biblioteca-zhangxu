@@ -16,6 +16,7 @@ public class BibliotecaAppTest {
     @Before
     public void generateInitBooksInLib() {
         bibliotecaApp = new BibliotecaApp();
+        bibliotecaApp.setLoginUser(new User("zhangxv", "xian-001", "123456"));
     }
 
     @Test
@@ -162,15 +163,28 @@ public class BibliotecaAppTest {
     }
 
     @Test
-    public void testUserLoginLibrary() {
+    public void testUserLoginLibrarySuccessShowMainMenu() {
         StringBuilder expect = new StringBuilder();
-        expect.append("please input username\n");
+        expect.append("please input username(library num)\n");
         expect.append("please input password\n");
         expect.append("login success\n");
-        ByteArrayInputStream input = setSystemInput("zhang-xv\n123456");
+        showMainMenu(expect);
+        ByteArrayInputStream input = setSystemInput("xian-001\n123456");
         ByteArrayOutputStream outputStream = setSystemOutput();
         bibliotecaApp.loginPage();
         assertEquals(expect.toString(), outputStream.toString());
+    }
+
+    @Test
+    public void testUserLoginFailFirstTime() {
+        StringBuilder expect = new StringBuilder();
+        expect.append("please input username(library num)\n");
+        expect.append("please input password\n");
+        expect.append("login fail, user not exist\n");
+        ByteArrayInputStream input = setSystemInput("xili\n333\nxian-001\n123456");
+        ByteArrayOutputStream outputStream = setSystemOutput();
+        bibliotecaApp.loginPage();
+        assertTrue(isOutputContainExpect(outputStream, expect));
     }
 
     private Book getBookInLastOfBookList() {

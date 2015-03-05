@@ -8,14 +8,14 @@ public class Movie {
     private int year;
     private String director;
     private int rating = -1;
-    private boolean borrow = false;
+    private User borrowUser = null;
 
     public boolean isBorrowOut() {
-        return borrow;
+        return borrowUser != null;
     }
 
-    public void borrowOut() {
-        borrow = true;
+    public void borrowOut(User user) {
+        this.borrowUser = user;
     }
 
     public Movie(String name, int year, String director, int rating) {
