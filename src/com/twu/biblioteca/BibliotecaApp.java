@@ -200,6 +200,10 @@ public class BibliotecaApp {
         this.movies.add(new Movie(name, year, director));
     }
 
+    public void setLoginUser(User user) {
+        this.loginUser = user;
+    }
+
     private Book findBookInBookListByName(String bookName) {
         for(Book book: books) {
             if(book.getName().equalsIgnoreCase(bookName)) {
@@ -216,10 +220,6 @@ public class BibliotecaApp {
             }
         }
         return null;
-    }
-
-    public void setLoginUser(User user) {
-        this.loginUser = user;
     }
 
     private void showReturnBookPromptMessage() {
