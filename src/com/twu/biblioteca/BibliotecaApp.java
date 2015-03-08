@@ -1,5 +1,7 @@
 package com.twu.biblioteca;
 
+import com.twu.biblioteca.com.twu.biblioteca.util.StringUtils;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -58,7 +60,7 @@ public class BibliotecaApp {
     private void letUserChooseOption() {
         Scanner scanner = new Scanner(System.in);
         String option = scanner.nextLine();
-        while(!option.equals("quit")) {
+        while(!option.equals(StringUtils.USER_QUIT_COMMAND)) {
             if(isValidIntOption(option)) {
                 selectMenuOption(parseInt(option));
                 option = scanner.nextLine();
@@ -72,18 +74,18 @@ public class BibliotecaApp {
     public void loginPage() {
         Scanner scanner = new Scanner(System.in);
         while (true) {
-            System.out.println("please input username(library num)");
+            System.out.println(StringUtils.LOGIN_PAGE_INPUT_USER_PROMPT);
             String userLibraryNum = scanner.nextLine();
-            System.out.println("please input password");
+            System.out.println(StringUtils.LOGIN_PAGE_INPUT_PASSWORD_PROMPT);
             String password = scanner.nextLine();
             User loginUser = findUser(userLibraryNum, password);
             if(loginUser != null) {
-                System.out.println("login success");
+                System.out.println(StringUtils.LOGIN_PAGE_LOGIN_SUCCESS_MSG);
                 setLoginUser(loginUser);
                 MainMenu.show();
                 break;
             } else {
-                System.out.println("login fail, user not exist");
+                System.out.println(StringUtils.LOGIN_PAGE_LOGIN_FAIL_MSG);
             }
         }
     }
@@ -143,20 +145,8 @@ public class BibliotecaApp {
         }
     }
 
-    private void showCheckMovieFailMessage() {
-        System.out.println("That movie is not available.");
-    }
-
-    private void showCheckMovieSuccessMessage() {
-        System.out.println("enjoy movie at home");
-    }
-
-    private void showCheckMoviePromptMessage() {
-        System.out.println("please checkout movie, input movie name");
-    }
-
     public void showBookList() {
-        System.out.println("Book List:");
+        System.out.println(StringUtils.SHOW_BOOK_LIST);
         for(Book book : books) {
             if(!book.isBorrowOut()){
                 System.out.println(book);
@@ -165,7 +155,7 @@ public class BibliotecaApp {
     }
 
     public void showMovieList() {
-        System.out.println("Movie List:");
+        System.out.println(StringUtils.SHOW_MOVIE_LIST);
         for(Movie movie : movies) {
             if(!movie.isBorrowOut()) {
                 System.out.println(movie);
@@ -208,7 +198,7 @@ public class BibliotecaApp {
     }
 
     public void showWelcomeMessage() {
-        System.out.println("welcome to use biblioteca");
+        System.out.println(StringUtils.WELCOME_MESSAGE);
     }
 
     public void showMainMenu() {
@@ -265,28 +255,40 @@ public class BibliotecaApp {
         this.loginUser = user;
     }
 
+    private void showReturnBookPromptMessage() {
+        System.out.println(StringUtils.RETURN_BOOK_BY_NAME_PROMPT);
+    }
+
     private void showReturnBookSuccessMessage() {
-        System.out.println("Thank you for returning the book.");
+        System.out.println(StringUtils.RETURN_BOOK_SUCCESS_MSG);
     }
 
     private void showReturnBookFailMessage() {
-        System.out.println("That is not a valid book to return.");
-    }
-
-    private void showBorrowBookFailMessage() {
-        System.out.println("That book is not available.");
-    }
-
-    private void showBorrowBookSuccessMessage() {
-        System.out.println("Thank you! Enjoy the book");
-    }
-
-    private void showReturnBookPromptMessage() {
-        System.out.println("please return book(type book name)");
+        System.out.println(StringUtils.RETURN_BOOK_FAIL_MSG);
     }
 
     private void showCheckBookPromptMessage() {
-        System.out.println("please checkout book(type book name)");
+        System.out.println(StringUtils.CHECKOUT_BOOK_BY_NAME_PROMPT);
+    }
+
+    private void showBorrowBookSuccessMessage() {
+        System.out.println(StringUtils.CHECKOUT_BOOK_SUCCESS_MSG);
+    }
+
+    private void showBorrowBookFailMessage() {
+        System.out.println(StringUtils.CHECKOUT_BOOK_FAIL_MSG);
+    }
+
+    private void showCheckMoviePromptMessage() {
+        System.out.println(StringUtils.CHECKOUT_MOVIE_BY_NAME_PROMPT);
+    }
+
+    private void showCheckMovieFailMessage() {
+        System.out.println(StringUtils.CHECKOUT_MOVIE_FAIL_MSG);
+    }
+
+    private void showCheckMovieSuccessMessage() {
+        System.out.println(StringUtils.CHECKOUT_MOVIE_SUCCESS_MSG);
     }
 
     private boolean isValidIntOption(String option) {
