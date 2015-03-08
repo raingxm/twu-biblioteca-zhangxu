@@ -46,7 +46,7 @@ public class BibliotecaApp {
         if(!checkUserLogin()) {
             loginPage();
         }
-        libraryHomePage();
+        displayHomePage();
         letUserChooseOption();
     }
 
@@ -172,7 +172,7 @@ public class BibliotecaApp {
         System.out.println(StringUtils.WELCOME_MESSAGE);
     }
 
-    public void libraryHomePage() {
+    public void displayHomePage() {
         showWelcomeMessage();
         mainMenu.show();
     }
