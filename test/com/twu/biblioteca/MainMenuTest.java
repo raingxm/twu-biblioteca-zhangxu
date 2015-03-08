@@ -1,5 +1,6 @@
 package com.twu.biblioteca;
 
+import org.junit.Before;
 import org.junit.Test;
 
 import java.io.ByteArrayOutputStream;
@@ -8,6 +9,12 @@ import java.io.PrintStream;
 import static org.junit.Assert.*;
 
 public class MainMenuTest {
+    private MainMenu menu;
+
+    @Before
+    public void setUp() {
+        menu = new MainMenu();
+    }
 
     @Test
     public void testSeeCheckoutOptionInMainMenu() {
@@ -15,7 +22,7 @@ public class MainMenuTest {
         checkoutMessage.append("2: Checkout Book\n");
 
         ByteArrayOutputStream output = setSystemOutput();
-        MainMenu.show();
+        menu.show();
 
         assertTrue(isOutputContainExpect(output, checkoutMessage));
     }
@@ -26,7 +33,7 @@ public class MainMenuTest {
         message.append("4: Show Movie List\n");
 
         ByteArrayOutputStream output = setSystemOutput();
-        MainMenu.show();
+        menu.show();
         assertTrue(isOutputContainExpect(output, message));
     }
 
@@ -36,7 +43,7 @@ public class MainMenuTest {
         checkoutMessage.append("5: Checkout Movie(type movie name)\n");
 
         ByteArrayOutputStream output = setSystemOutput();
-        MainMenu.show();
+        menu.show();
         assertTrue(isOutputContainExpect(output, checkoutMessage));
     }
 
@@ -46,7 +53,7 @@ public class MainMenuTest {
         message.append("6: Show My Profile\n");
 
         ByteArrayOutputStream output = setSystemOutput();
-        MainMenu.show();
+        menu.show();
         assertTrue(isOutputContainExpect(output, message));
     }
 

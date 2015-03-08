@@ -1,5 +1,6 @@
 package com.twu.biblioteca;
 
+import com.twu.biblioteca.com.twu.biblioteca.util.Options;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -37,7 +38,7 @@ public class BibliotecaAppTest {
         showBookList(expect);
         ByteArrayOutputStream output = setSystemOutput();
 
-        bibliotecaApp.selectMenuOption(1);
+        Options.fromString("1").execute(bibliotecaApp);
         assertEquals(expect.toString(), output.toString());
     }
 
@@ -47,7 +48,7 @@ public class BibliotecaAppTest {
         showMovieList(expect);
         ByteArrayOutputStream output = setSystemOutput();
 
-        bibliotecaApp.selectMenuOption(4);
+        Options.fromString(Options.SHOW_MOVIE_LIST_OPTION.toString()).execute(bibliotecaApp);
         assertEquals(expect.toString(), output.toString());
     }
 
@@ -59,7 +60,7 @@ public class BibliotecaAppTest {
 
         ByteArrayOutputStream output = setSystemOutput();
 
-        bibliotecaApp.selectMenuOption(22);
+        Options.fromString("22").execute(bibliotecaApp);
         assertEquals(expect.toString(), output.toString());
     }
 
@@ -71,7 +72,9 @@ public class BibliotecaAppTest {
         showBookList(expect);
         showInvalidOptionWarningMessage(expect);
         showBookList(expect);
-        ByteArrayInputStream input = setSystemInput("1\n22\n1\nquit");
+        ByteArrayInputStream input = setSystemInput(Options.SHOW_BOOK_LIST.toString() +
+                        "\n" + Options.UNKNOW_OPTION.toString() + "\n"
+                        + Options.SHOW_BOOK_LIST + "\nquit");
 
         ByteArrayOutputStream output = setSystemOutput();
         bibliotecaApp.run();
@@ -98,7 +101,7 @@ public class BibliotecaAppTest {
 
         ByteArrayInputStream inputBookName = setSystemInput("C++ Primer");
         ByteArrayOutputStream output = setSystemOutput();
-        bibliotecaApp.selectMenuOption(MainMenu.CHECKOUT_BOOK_OPTION);
+        Options.fromString(Options.CHECKOUT_BOOK_OPTION.toString()).execute(bibliotecaApp);
         assertEquals(expect.toString(), output.toString());
     }
 
@@ -110,7 +113,7 @@ public class BibliotecaAppTest {
 
         ByteArrayInputStream inputBookName = setSystemInput("C Primer");
         ByteArrayOutputStream output = setSystemOutput();
-        bibliotecaApp.selectMenuOption(MainMenu.CHECKOUT_BOOK_OPTION);
+        Options.fromString(Options.CHECKOUT_BOOK_OPTION.toString()).execute(bibliotecaApp);
         assertEquals(expect.toString(), output.toString());
     }
 
@@ -129,7 +132,7 @@ public class BibliotecaAppTest {
         checkoutMessage.append("3: Return Book\n");
 
         ByteArrayOutputStream output = setSystemOutput();
-        bibliotecaApp.showMainMenu();
+        bibliotecaApp.getMainMenu().show();
 
         assertTrue(isOutputContainExpect(output, checkoutMessage));
     }
@@ -193,7 +196,7 @@ public class BibliotecaAppTest {
         expect.append(bibliotecaApp.getLoginUser().toString() + "\n");
 
         ByteArrayOutputStream outputStream = setSystemOutput();
-        bibliotecaApp.selectMenuOption(MainMenu.SHOW_USER_INFO_OPTION);
+        Options.fromString(Options.SHOW_USER_INFO_OPTION.toString()).execute(bibliotecaApp);
         assertEquals(expect.toString(), outputStream.toString());
     }
 

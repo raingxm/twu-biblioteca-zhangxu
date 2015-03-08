@@ -1,26 +1,27 @@
 package com.twu.biblioteca;
 
+import com.twu.biblioteca.com.twu.biblioteca.util.Options;
 import com.twu.biblioteca.com.twu.biblioteca.util.StringUtils;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-import static java.lang.Integer.parseInt;
-
 public class BibliotecaApp {
     private List<Book> books = new ArrayList<Book>();
-
     private List<Movie> movies = new ArrayList<Movie>();
-
     private User loginUser = null;
-
     private List<User> users = new ArrayList<User>();
+    private MainMenu mainMenu = new MainMenu();
 
     public BibliotecaApp() {
         addSomeBooksToLib();
         addSomeMoviesToLib();
         addInitUsers();
+    }
+
+    public MainMenu getMainMenu() {
+        return mainMenu;
     }
 
     private void addInitUsers() {
@@ -61,13 +62,8 @@ public class BibliotecaApp {
         Scanner scanner = new Scanner(System.in);
         String option = scanner.nextLine();
         while(!option.equals(StringUtils.USER_QUIT_COMMAND)) {
-            if(isValidIntOption(option)) {
-                selectMenuOption(parseInt(option));
-                option = scanner.nextLine();
-            } else {
-                MainMenu.invalidOptionPromptMessage();
-                option = scanner.nextLine();
-            }
+            Options.fromString(option).execute(this);
+            option = scanner.nextLine();
         }
     }
 
@@ -82,7 +78,7 @@ public class BibliotecaApp {
             if(loginUser != null) {
                 System.out.println(StringUtils.LOGIN_PAGE_LOGIN_SUCCESS_MSG);
                 setLoginUser(loginUser);
-                MainMenu.show();
+                mainMenu.show();
                 break;
             } else {
                 System.out.println(StringUtils.LOGIN_PAGE_LOGIN_FAIL_MSG);
@@ -99,36 +95,11 @@ public class BibliotecaApp {
         return null;
     }
 
-    public void selectMenuOption(int option) {
-        switch (option) {
-            case MainMenu.SHOW_BOOK_LIST_OPTION:
-                showBookList();
-                break;
-            case MainMenu.CHECKOUT_BOOK_OPTION:
-                enterCheckoutBookMenu();
-                break;
-            case MainMenu.RETURN_BOOK_OPTION:
-                enterReturnBookMenu();
-                break;
-            case MainMenu.SHOW_MOVIE_LIST_OPTION:
-                showMovieList();
-                break;
-            case MainMenu.CHECKOUT_MOVIE_OPTION:
-                enterCheckoutMovieMenu();
-                break;
-            case MainMenu.SHOW_USER_INFO_OPTION:
-                showLoginUserInformation();
-                break;
-            default:
-                MainMenu.invalidOptionPromptMessage();
-        }
-    }
-
-    private void showLoginUserInformation() {
+    public void showLoginUserInformation() {
         System.out.println(loginUser);
     }
 
-    private void enterCheckoutMovieMenu() {
+    public void enterCheckoutMovieMenu() {
         showCheckMoviePromptMessage();
         Scanner checkoutScanner = new Scanner(System.in);
         String movieName = checkoutScanner.nextLine();
@@ -201,13 +172,9 @@ public class BibliotecaApp {
         System.out.println(StringUtils.WELCOME_MESSAGE);
     }
 
-    public void showMainMenu() {
-        MainMenu.show();
-    }
-
     public void libraryHomePage() {
         showWelcomeMessage();
-        MainMenu.show();
+        mainMenu.show();
     }
 
     public void addSomeBooksToLib() {
@@ -289,14 +256,5 @@ public class BibliotecaApp {
 
     private void showCheckMovieSuccessMessage() {
         System.out.println(StringUtils.CHECKOUT_MOVIE_SUCCESS_MSG);
-    }
-
-    private boolean isValidIntOption(String option) {
-        try {
-            parseInt(option);
-        } catch (NumberFormatException e) {
-            return false;
-        }
-        return true;
     }
 }
