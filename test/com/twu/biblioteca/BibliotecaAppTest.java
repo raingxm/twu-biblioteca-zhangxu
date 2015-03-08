@@ -54,7 +54,7 @@ public class BibliotecaAppTest {
 
     @Test
     public void testWhenUserSelectInvalidOptionShowWarningMessage() {
-        bibliotecaApp.addSomeBooksToLib();
+        bibliotecaApp.initSomeBooksToLib();
         StringBuilder expect = new StringBuilder();
         showInvalidOptionWarningMessage(expect);
 

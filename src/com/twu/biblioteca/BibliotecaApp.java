@@ -15,16 +15,16 @@ public class BibliotecaApp {
     private MainMenu mainMenu = new MainMenu();
 
     public BibliotecaApp() {
-        addSomeBooksToLib();
-        addSomeMoviesToLib();
-        addInitUsers();
+        initSomeBooksToLib();
+        initSomeMoviesToLib();
+        initUsers();
     }
 
     public MainMenu getMainMenu() {
         return mainMenu;
     }
 
-    private void addInitUsers() {
+    private void initUsers() {
         this.users.add(new User("zhangxv", "xian-001", "raingxm@163.com","89893843", "123456"));
         this.users.add(new User("liuhuimin", "bei-002", "liuhuimin@126.com", "81783742", "01234"));
         this.users.add(new User("yehua", "hei-003", "yehua@gmail.com", "62537214", "88888888"));
@@ -177,7 +177,7 @@ public class BibliotecaApp {
         mainMenu.show();
     }
 
-    public void addSomeBooksToLib() {
+    public void initSomeBooksToLib() {
         addANewBookToLibrary("C++ Primer", "Bob", 1998);
         addANewBookToLibrary("Java HeadFirst", "Luce", 2007);
     }
@@ -186,7 +186,7 @@ public class BibliotecaApp {
         this.books.add(new Book(name, author, publishYear));
     }
 
-    public void addSomeMoviesToLib() {
+    public void initSomeMoviesToLib() {
         addANewMovieToLibrary("Tomorrow", 2010, "Speberg", 9);
         addANewMovieToLibrary("Spring", 2003, "Steve");
         addANewMovieToLibrary("Money Ball", 2007, "Royn Smith", 8);
